@@ -106,17 +106,25 @@ int main() {
 	//et le gestionnaire embarquant les règles de contrôle
 	while (1) {
 		if (tempCPT > seuilT) {
+			lock.lock();
 			go_chauffage = false;
+			lock.unlock();
 			if (pressionCPT > seuilP) {
+				lock.lock();
 				go_pompe = true;
+				lock.unlock();
 			}
 			else {
+				lock.lock();
 				go_pompe = false;
+				lock.unlock();
 			}
 		}
 		else {
+			lock.lock();
 			go_chauffage = true;
 			go_pompe = true;
+			lock.unlock();
 		}
 		Sleep(0);
 	}
